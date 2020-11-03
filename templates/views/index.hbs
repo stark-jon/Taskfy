@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-App</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    {{>header}}
+    <main class="main">
+        <img class="index--logo" src="./img/logo.png" alt="logo">
+        <h2 class="index--heading">{{heading}}</h2>
+        <p class="index--description">{{description}}</p>
+    </main>
+    <footer class="footer" style="flex-direction: row;">
+    <div class="footer--content">
+        <nav class="footer--nav">
+            <a href="#" class="footer--link">Contact</a>
+            <a href="#" class="footer--link">About</a>
+            <a href="#" class="footer--link">Privacy</a>
+            <a href="#" class="footer--link">Terms</a>
+        </nav>
+        <div class="footer--copyright">
+            <p>
+                Powered by <a href="#" class="footer--link">Code Reigment</a>. Copyright &copy; by Code Regiment.
+            </p>
+        </div> 
+    </div>
+</footer>
+<script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-App: {{ user.name }}</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body id="isAuth">
+    {{>header}}
+    <main class="task-main">
+
+        <div class="create-task">
+            <form class="form" autocomplete="off" action="/tasks" method="POST" id="createTask">
+                <div class="form--group">
+                    <label class="form--label center headings">Create Task</label>
+                </div>
+                <div class="form--group">
+                    <input type="text" name="task_name" class="form--input" id="task_name" placeholder="Task Name" required>
+                    <label for="task_name" class="form--label">Task Name</label>
+                </div>
+                <div class="form--group">
+                    <label for="priority" class="form--label">Priority</label>
+                    {{!-- <input type="text" name="priority" class="form--input" id="priority" placeholder="low, normal, high" required> --}}
+                    <select class="form--input" name="priority" id="priority">
+                        <option value="low">low</option>
+                        <option value="normal" selected>normal</option>
+                        <option value="high">high</option>
+                    </select> 
+                </div>
+                <div class="form--group">
+                    <input type="checkbox" name="completed" class="form--input center" id="completed" placeholder="Completed" value="true">
+                    <label for="completed" class="form--label" style="margin-top: -2rem;">Completed</label>
+                </div>
+                <div class="form--group">
+                    <input type="hidden" name="owner" class="form--input center" id="owner" placeholder="owner" value="{{user._id}}">
+                </div>
+                <div class="form--group">
+                    <button class="btn btn--blue center" type="submit">create</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="tasks">
+            <div class="form--group">
+                <label class="form--label headings">Read & Update</label>
+            </div>
+            {{#if task}}
+                {{#each task}}
+                    <form class="form" autocomplete="off" method="POST"  action="/tasks/task/update" style="box-shadow:none;border-bottom: 1px solid #77959e">
+                        <div class="form--group">
+                            <input type="text" name="task_name" class="form--input" placeholder="Task Name" value="{{this.task_name}}">
+                            <label class="form--label">Task Name</label> 
+                        </div>
+                        <div class="form--group">
+                            <input type="text" class="form--input" name="priority" placeholder="Priority" value="{{this.priority}}">
+                            <label class="form--label">Priority</label>
+                        </div>
+                        <div class="form--group">
+                            {{#if this.completed}}
+                                <input type="checkbox" name="completed" class="form--input center" placeholder="Completed" value="false" checked>
+                            {{else}}
+                                <input type="checkbox" name="completed" class="form--input center" placeholder="Completed" value="true" >
+                            {{/if}}
+                            <label class="form--label" style="margin-top: -2rem;">Completed</label>
+                        </div>
+                        <div class="form--group">
+                            <input type="hidden" id="update" name="_id" value="{{this._id}}" class="form--input center">
+                        </div>
+                        <div class="form--group" id="updateInfo"></div>
+                        <div class="form--group">
+                            <button class="btn btn--green center" type="submit">update</button>
+                        </div>
+                    </form>
+                {{/each}}
+            {{else}}
+                <div class="form" style="box-shadow:none;border-bottom: 1px solid #77959e">
+                    <div class="form--group">
+                        <label class="form--label" style="font-weight: 400;">No tasks Found</label>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+        
+        <div class="tasks">
+            <div class="form--group">
+                <label class="form--label headings">Read & Delete</label>
+            </div>
+            {{#if task}}
+                {{#each task}}
+                    <form class="form" autocomplete="off" method="POST"  action="/tasks/task/delete" style="box-shadow:none;border-bottom: 1px solid #77959e">
+                        <div class="form--group">
+                            <input type="text" name="task_name" class="form--input" placeholder="Task Name" value="{{this.task_name}}" disabled>
+                            <label class="form--label">Task Name</label> 
+                        </div>
+                        <div class="form--group">
+                            <input type="text" class="form--input" name="priority" placeholder="Priority" value="{{this.priority}}" disabled>
+                            <label class="form--label">Priority</label>
+                        </div>
+                        <div class="form--group">
+                            {{#if this.completed}}
+                                <input type="checkbox" name="completed" class="form--input center" placeholder="Completed" value="false" checked disabled>
+                            {{else}}
+                                <input type="checkbox" name="completed" class="form--input center" placeholder="Completed" value="true" disabled>
+                            {{/if}}
+                            <label class="form--label" style="margin-top: -2rem;">Completed</label>
+                        </div>
+                        <div class="form--group">
+                            <input type="hidden" id="update" name="_id" value="{{this._id}}" class="form--input center">
+                        </div>
+                        <div class="form--group">
+                            <button class="btn btn--warn center" type="submit">delete</button>
+                        </div>
+                    </form>
+                {{/each}}
+            {{else}}
+                <div class="form" style="box-shadow:none;border-bottom: 1px solid #77959e">
+                    <div class="form--group">
+                        <label class="form--label" style="font-weight: 400;">No tasks Found</label>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+
+        
+    </main>
+    {{>footerUser}}
+<script src="../js/app.js"></script>
+</body>
+</html>

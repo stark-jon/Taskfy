@@ -1,0 +1,16 @@
+<header>
+    <h1 class="main--heading">{{title}}</h1>
+    
+    <div class="navbar">
+        <nav class="navigation">
+            {{#each links}}
+                <a class="navigation--links" href="{{this.url}}">{{this.name}}</a>
+            {{/each}}
+            {{#if logout}}
+                {{!-- <img src="../img/logout.png" alt="" class="logout--img"> --}}
+                <a class="navigation--links" href="#" id="logout">{{logout.name}}</a>
+            {{/if}}
+        </nav>
+         
+    </div>
+</header>
